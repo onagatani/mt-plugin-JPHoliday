@@ -36,6 +36,7 @@ my $plugin = __PACKAGE__->new({
     system_config_template => \&_system_config,
     settings => MT::PluginSettings->new([
         ['apikey' ,{ Default => undef , Scope => 'system' }],
+        ['calender_id' ,{ Default => 'japanese__ja@holiday.calendar.google.com' , Scope => 'system' }],
     ]),
 });
 
@@ -47,6 +48,11 @@ sub _system_config {
     id="apikey"
     label="<__trans phrase="Google API KEY">">
 <input type="text" name="apikey" value="<$mt:getvar name="apikey" escape="html"$>" />
+</mtapp:setting>
+<mtapp:setting
+    id="calender_id"
+    label="<__trans phrase="Google Calender ID">">
+<input type="text" name="calender_id" value="<$mt:getvar name="calender_id" escape="html"$>" />
 </mtapp:setting>
 __HTML__
 }

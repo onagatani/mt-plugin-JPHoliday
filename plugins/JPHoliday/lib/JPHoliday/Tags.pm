@@ -7,7 +7,6 @@ use URI;
 use JSON qw/decode_json/;
 
 use constant ENDPOINT => 'https://www.googleapis.com/calendar/v3/calendars/%s/events';
-use constant CALENDER_ID => 'japanese__ja@holiday.calendar.google.com';
 
 sub jp_holiday {
     my ($ctx, $args, $cond) = @_;
@@ -28,7 +27,7 @@ sub jp_holiday {
 
     my $end_date = sprintf'%s-%02d-01T00:00:00Z', $year, $month;
 
-    my $api_url = sprintf ENDPOINT(), CALENDER_ID();
+    my $api_url = sprintf ENDPOINT(), $config->{calender_id};
 
     my $uri = URI->new($api_url);
     $uri->query_form(
