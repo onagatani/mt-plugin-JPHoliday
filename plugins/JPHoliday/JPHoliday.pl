@@ -52,7 +52,7 @@ sub _system_config {
 </mtapp:setting>
 <mtapp:setting
     id="calendar_id"
-    label="<__trans phrase="Google Calender ID">">
+    label="<__trans phrase="Google Calendar ID">">
 <input type="text" name="calendar_id" value="<$mt:getvar name="calendar_id" escape="html"$>" />
 </mtapp:setting>
 __HTML__

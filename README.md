@@ -23,7 +23,7 @@ MTテンプレートで祝日判定を行います。
 </mt:JPHoliday>
 ```
 
-MTCalenderと組合わせて利用する例
+MTCalendarと組合わせて利用する例
 ```
 <mt:JPHoliday month="201804">
 <mt:Calendar month="201804">
@@ -70,7 +70,7 @@ Google Calendar APIのJSONを直接参照する場合
 
 ifJPHoliday及びJPHolidayNameは引数のmonthが必須です。   
 フォーマット：%Y-%m-%d   
-MTCalenderタグ内で利用する場合は引数は必要ありません。   
+MTCalendarタグ内で利用する場合は引数は必要ありません。   
 
 ## 動作環境
 
@@ -79,7 +79,7 @@ MT6で動作確認をしていますが、MT5,MT7でも利用できると思い�
 ## 設定
 
 GoogleアカウントでカレンダーAPIのaccesskeyを取得し、プラグイン設定に保存してください。
-CalenderIDの設定は日本の祝日の場合は変更しないで下さい。日本以外の祝日に適用したい場合は変更して下さい。(動作保証しません）
+CalendarIDの設定は日本の祝日の場合は変更しないで下さい。日本以外の祝日に適用したい場合は変更して下さい。(動作保証しません）
 
 ## 注意
 
