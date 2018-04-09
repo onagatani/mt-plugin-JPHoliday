@@ -27,7 +27,7 @@ sub jp_holiday {
 
     my $end_date = sprintf'%s-%02d-01T00:00:00Z', $year, $month;
 
-    my $api_url = sprintf ENDPOINT(), $config->{calender_id};
+    my $api_url = sprintf ENDPOINT(), $config->{calendar_id};
 
     my $uri = URI->new($api_url);
     $uri->query_form(
