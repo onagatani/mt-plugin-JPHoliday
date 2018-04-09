@@ -4,13 +4,13 @@ use warnings;
 use utf8;
 use JPHoliday::UA;
 use URI;
-use JSON qw/decode_json/;
-
+use JSON qw/decode_json to_json/;
+use Encode;
 use constant ENDPOINT => 'https://www.googleapis.com/calendar/v3/calendars/%s/events';
 
 sub jp_holiday {
     my ($ctx, $args, $cond) = @_;
-    return if $ctx->{__stash}{holiday};
+    return if $ctx->{__stash}{holiday_name};
 
     my $blog = $ctx->{__stash}{blog} or return;
 
@@ -55,27 +55,37 @@ sub jp_holiday {
     for my $item (@{$data->{items}}) {
         $holiday->{ $item->{start}->{date} } = $item->{summary};
     }
-    local $ctx->{__stash}{holiday} = $holiday;
+    local $ctx->{__stash}{holiday_name} = $holiday;
+    local $ctx->{__stash}{holiday_raw_json} = to_json($data);
     return $ctx->slurp($args, $cond);
 }
 
 sub if_jp_holiday {
     my ($ctx, $args) = @_;
 
-    my $holiday = $ctx->stash('holiday') or return;
+    my $holiday = $ctx->stash('holiday_name') or return;
     my $date = $args->{date} ? $args->{date} : $ctx->tag('CalendarDate', { format => '%Y-%m-%d' });
 
     return $holiday->{$date} ? 1 : 0;
 }
 
-sub jp_holiday_detail {
+sub jp_holiday_name {
     my ($ctx, $args) = @_;
 
-    my $holiday = $ctx->stash('holiday') or return;
+    my $holiday = $ctx->stash('holiday_name') or return;
     my $date = $args->{date} ? $args->{date} : $ctx->tag('CalendarDate', { format => '%Y-%m-%d' });
 
     return $holiday->{$date};
 }
+
+sub jp_holiday_raw_json {
+    my ($ctx, $args) = @_;
+
+    my $json = $ctx->stash('holiday_raw_json') or return;
+
+    return $json;
+}
+
 
 1;
 

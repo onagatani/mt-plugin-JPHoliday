@@ -29,7 +29,8 @@ my $plugin = __PACKAGE__->new({
                 'IfJPHoliday?' => 'JPHoliday::Tags::if_jp_holiday',
             },
             function => +{
-                JPHolidayDetail => 'JPHoliday::Tags::jp_holiday_detail',
+                JPHolidayName => 'JPHoliday::Tags::jp_holiday_name',
+                JPHolidayRawJSON => 'JPHoliday::Tags::jp_holiday_raw_json',
             },
         },
     },
