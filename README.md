@@ -6,11 +6,19 @@ MTテンプレートで祝日判定を行います。
 
 ## 機能
 
+* 追加されるタグ   
+  * ブロックタグ   
+    * <mt:JPHoliday month="yyyymm"> 祝日判定をする箇所を括ります   
+    * <mt:IfJPHoliday date="yyyy-mm-dd"> 祝日判定を行います。dateを省略するとCalendarDateが利用されます  
+  * ファンクションタグ   
+    * <$mt:JPHolidayName date="yyyy-mm-dd"$> 祝日名を出力します。dateを省略するとCalendarDateが利用されます   
+    * <$mt:JPHolidayRawJSON$> Google APIから取得した一ヶ月分の祝日情報をJSONで出力します   
+
 4月の祝日を取得し判定する例は以下になります。
 ```
 <mt:JPHoliday month="201804">
 <mt:IfJPHoliday date="2018-04-29">
-今日は<$mt:JPHolidayDetail date="2018-04-29"$>の日です
+今日は<$mt:JPHolidayName date="2018-04-29"$>の日です
 </mt:IfJPHoliday>
 </mt:JPHoliday>
 ```
@@ -26,7 +34,7 @@ MTCalenderと組合わせて利用する例
   <mt:Else>
     <mt:IfJPHoliday>
       <mt:SetVarBlock name="class"> class="holiday"</mt:SetVarBlock>
-      <mt:SetVarBlock name="title"><$mt:CalendarDate format="%Y年%m月%d日"$>(<$mt:JPHolidayDetail$>)</mt:SetVarBlock>
+      <mt:SetVarBlock name="title"><$mt:CalendarDate format="%Y年%m月%d日"$>(<$mt:JPHolidayName$>)</mt:SetVarBlock>
     <mt:Else>
       <mt:SetVarBlock name="title"><$mt:CalendarDate format="%Y年%m月%d日"$></mt:SetVarBlock>
       <mt:If tag="CalendarDate" format="%w" eq="0">
@@ -50,10 +58,17 @@ MTCalenderと組合わせて利用する例
 
 </mt:Calendar month="2018-04">
 </mtJPHoliday month="2018-04">
+```
+
+Google Calendar APIのJSONを直接参照する場合
+```
+<mt:JPHoliday month="201804">
+<$mt:JPHolidayRawJSON$>
+</mt:JPHoliday>
 
 ```
 
-ifJPHoliday及びJPHolidayDetailは引数のmonthが必須です。   
+ifJPHoliday及びJPHolidayNameは引数のmonthが必須です。   
 フォーマット：%Y-%m-%d   
 MTCalenderタグ内で利用する場合は引数は必要ありません。   
 
